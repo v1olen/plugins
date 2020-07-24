@@ -210,7 +210,8 @@ class MethodChannelWebViewPlatform implements WebViewPlatformController {
       'javascriptChannelNames': creationParams.javascriptChannelNames.toList(),
       'userAgent': creationParams.userAgent,
       'autoMediaPlaybackPolicy': creationParams.autoMediaPlaybackPolicy.index,
-      'usesHybridComposition': usesHybridComposition,
+      'usesHybridComposition': creationParams.opaque ? true : usesHybridComposition,
+      'opaque': creationParams.opaque,
     };
   }
 }

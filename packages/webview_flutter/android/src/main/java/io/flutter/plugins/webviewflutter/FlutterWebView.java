@@ -93,11 +93,13 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
         (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
     displayListenerProxy.onPreWebViewInitialization(displayManager);
 
+    boolean opaque = (boolean) params.get("opaque");
+
     Boolean usesHybridComposition = (Boolean) params.get("usesHybridComposition");
     webView =
-        (usesHybridComposition)
+        (usesHybridComposition || opaque)
             ? new WebView(context)
-            : new InputAwareWebView(context, containerView);
+            : new InputAwareWebView(context, containerView, opaque);
 
     displayListenerProxy.onPostWebViewInitialization(displayManager);
 
